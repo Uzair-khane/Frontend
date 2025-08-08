@@ -53,7 +53,7 @@ const messages = ref([
   { role: 'assistant', content: "Hello! I'm your AI tutor. Ask me anything. 👋" }
 ])
 const chatContainer = ref(null)
-
+const config = useRuntimeConfig()
 const scrollToBottom = async () => {
   await nextTick()
   if (chatContainer.value) {
@@ -75,7 +75,7 @@ const sendMessage = async () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.NUXT_GROQ_API_KEY}`
+        'Authorization': `Bearer ${config.public.GROQ_API_KEY}`
        
       },
       body: JSON.stringify({
