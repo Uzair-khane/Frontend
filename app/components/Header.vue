@@ -33,7 +33,7 @@
 
 
       <!-- CTA Button -->
-      <nuxt-link to="/signin">
+      <nuxt-link to="/book">
         <button
           class="hidden md:block bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition"
         >
@@ -103,7 +103,7 @@
   </a>
 
 
-        <nuxt-link to="/signin">
+        <nuxt-link to="/book">
           <button
             class="md:block bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition"
           >
