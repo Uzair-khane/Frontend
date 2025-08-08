@@ -21,7 +21,7 @@ export default defineNuxtConfig({
   // 🔐 Environment variable support
   runtimeConfig: {
     public: {
-   
+    GROQ_API_KEY: process.env.GROQ_API_KEY,
     },
   },
   compatibilityDate: "2025-07-15",
