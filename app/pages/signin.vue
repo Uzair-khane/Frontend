@@ -1,102 +1,101 @@
 <template>
-  <div>
-    <h1 class="text-4xl font-bold mt-7 text-slate-900 text-center">Create Free Account</h1>
-    <p class="text-slate-700 text-center text-[17px] px-6 mt-2">
-      Clarity gives you the blocks and components you need to <br />
-      create a truly professional website.
-    </p>
-  </div>
+  <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 p-6">
+    <h1 class="text-4xl font-extrabold text-center mb-10 text-gray-800 drop-shadow-lg">
+      📚 My Learning Library
+    </h1>
 
-  <div class="max-w-md mx-auto bg-white p-8 mt-5 rounded-lg shadow-lg ">
-    <h1 class="text-2xl font-bold text-center mb-6">Sign Up</h1>
-
-    <form @submit.prevent="handleSubmit" class="space-y-4">
-      <div>
-        <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
-        <input
-          v-model="form.username"
-          type="text"
-          id="username"
-          required
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        />
-      </div>
-
-      <div>
-        <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-        <input
-          v-model="form.email"
-          type="email"
-          id="email"
-          required
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        />
-      </div>
-
-      <div>
-        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-        <input
-          v-model="form.password"
-          type="password"
-          id="password"
-          required
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        />
-      </div>
-
-      <button
-        type="submit"
-        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    <!-- Books Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div 
+        v-for="book in books" 
+        :key="book.title" 
+        class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300"
       >
-        Create Account
-      </button>
-    </form>
+        <!-- Book Image with Overlay -->
+        <div class="relative">
+          <img :src="book.image" alt="Book Cover" class="w-full h-52 object-cover" />
+          <span class="absolute top-3 left-3 bg-blue-600 text-white text-xs px-3 py-1 rounded-full shadow-md">
+            {{ book.category }}
+          </span>
+        </div>
 
-    
+        <!-- Book Info -->
+        <div class="p-5">
+          <h2 class="text-2xl font-bold text-gray-800 mb-2">{{ book.title }}</h2>
+          <p class="text-gray-600 text-sm leading-relaxed">{{ book.description }}</p>
 
-    <div class="mt-6 text-center">
-      <p class="text-sm text-gray-600">
-        Already have an account?
-        <a href="#" @click.prevent="$emit('toggle-form')" class="font-medium text-indigo-600 hover:text-indigo-500">
-          Sign In
-        </a>
-      </p>
+          <!-- Buttons -->
+          <div class="mt-5 flex gap-3">
+            <a 
+              :href="book.download" 
+              download 
+              class="flex-1 bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-green-600 active:scale-95 transition flex items-center justify-center gap-2"
+            >
+              Download
+            </a>
+            <a 
+              :href="book.viewOnline" 
+              target="_blank" 
+              class="flex-1 bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-600 active:scale-95 transition flex items-center justify-center gap-2"
+            >
+               View Online
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-
-const emit = defineEmits(['toggle-form']);
-
-const form = ref({
-  username: '',
-  email: '',
-  password: ''
-});
-
-const handleSubmit = () => {
-  // Get old users
-  const users = JSON.parse(localStorage.getItem('users') || '[]');
-
-  // Check if user already exists
-  const existingUser = users.find(u => u.email === form.value.email);
-  if (existingUser) {
-    alert('User already exists!');
-    return;
+const books = [
+  {
+    title: "HTML for Beginners",
+    category: "HTML",
+    description: "Learn the basics of HTML and build your first webpage.",
+    image: "/html.jpg",
+    download: "/html.pdf",
+    viewOnline: "/html.pdf"
+  },
+  {
+    title: "CSS Mastery",
+    category: "CSS",
+    description: "Master the art of styling websites with CSS.",
+    image: "https://via.placeholder.com/400x200?text=CSS+Book",
+    download: "/html.pdf",
+    viewOnline: "/html.pdf"
+  },
+  {
+    title: "Tailwind CSS Guide",
+    category: "Tailwind",
+    description: "Build modern UIs quickly with Tailwind CSS.",
+    image: "https://via.placeholder.com/400x200?text=Tailwind+Book",
+    download: "/books/tailwind.pdf",
+    viewOnline: "/books/tailwind.pdf"
+  },
+  {
+    title: "JavaScript Basics",
+    category: "JavaScript",
+    description: "Understand the fundamentals of JavaScript programming.",
+    image: "https://via.placeholder.com/400x200?text=JavaScript+Book",
+    download: "/books/javascript.pdf",
+    viewOnline: "/books/javascript.pdf"
+  },
+  {
+    title: "Vue.js Essentials",
+    category: "Vue.js",
+    description: "Learn Vue.js and create powerful web applications.",
+    image: "https://via.placeholder.com/400x200?text=Vue+Book",
+    download: "/books/vue.pdf",
+    viewOnline: "/books/vue.pdf"
+  },
+  {
+    title: "Nuxt.js Complete Guide",
+    category: "Nuxt.js",
+    description: "Build server-side rendered apps with Nuxt.js.",
+    image: "https://via.placeholder.com/400x200?text=Nuxt+Book",
+    download: "/books/nuxt.pdf",
+    viewOnline: "/books/nuxt.pdf"
   }
-
-  // Add new user
-  users.push({ ...form.value });
-  localStorage.setItem('users', JSON.stringify(users));
-  localStorage.setItem('currentUser', JSON.stringify(form.value.email));
-
-  alert('Account created successfully!');
-  
-  // Reset form
-  form.value = { username: '', email: '', password: '' };
-};
+]
 </script>
-
-

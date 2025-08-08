@@ -1,8 +1,11 @@
 <template>
+  <div>
+    <Header />
+  </div>
   <div class="min-h-screen bg-gray-100 text-gray-800">
     <!-- Header -->
     <header class="bg-white shadow-md py-4 px-6">
-      <h1 class="text-2xl font-bold text-center">📘 HTML Course - Learn Step by Step</h1>
+      <h1 class="text-2xl font-bold text-center">HTML Course - Learn Step by Step</h1>
     </header>
 
     <!-- Course Topics -->
@@ -71,6 +74,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import Header from '~/components/Header.vue'
 
 const topics = ref([
   {
