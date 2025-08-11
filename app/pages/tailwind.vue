@@ -49,7 +49,7 @@
  
     </section>
   </div>
-   <template>
+  
     <div
       class="w-full mx-auto p-8 bg-gradient-to-br from-purple-50 to-indigo-100 rounded-xl shadow-2xl mt-14"
     >
@@ -143,7 +143,7 @@
         </button>
       </div>
     </div>
-  </template>
+
 </template>
 
 <script setup>

@@ -60,7 +60,6 @@
     </section>
   </div>
   <!-- quiz  -->
-   <template>
   <div class="w-full mx-auto p-8 bg-gradient-to-br from-purple-50 to-indigo-100 rounded-xl shadow-2xl mt-14">
     <h2 class="text-3xl font-extrabold mb-8 text-center text-indigo-800 drop-shadow-md">
       HTML Quiz
@@ -143,7 +142,6 @@
       </button>
     </div>
   </div>
-</template>
 
 </template>
 

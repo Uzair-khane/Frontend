@@ -73,8 +73,8 @@ const books = [
     category: "JavaScript",
     description: "Understand the fundamentals of JavaScript programming.",
     image: "/js.jpg",
-    download: "/javascript.pdf",
-    viewOnline: "/javascript.pdf"
+    download: "/JavaScript.pdf",
+    viewOnline: "./JavaScript.pdf"
   },
   {
     title: "Vue.js Essentials",
@@ -89,8 +89,8 @@ const books = [
     category: "Nuxt.js",
     description: "Build server-side rendered apps with Nuxt.js.",
     image: "/nuxt.jpg",
-    download: "/nuxt.pdf",
-    viewOnline: "/nuxt.pdf"
+    download: "/vue.pdf",
+    viewOnline: "/vue.pdf"
   }
 ]
 </script>
