@@ -2,7 +2,7 @@
   <div>
     <!-- Header -->
     <header
-      class="flex  justify-between items-center py-6 px-6 md:px-10 bg-white shadow-md relative " 
+      class="flex  justify-between items-center py-6 px-6 md:px-10 bg-white relative " 
     >
       <div class="flex items-center gap-2">
         <img src="~/assets/Log.jpg" alt="Logo" class="h-10 w-10" />
@@ -120,12 +120,11 @@
   class="bg-[url('/baner.jpg')] bg-cover bg-center   text-center h-[650px] w-full"
 >
       <div class="grid-cols-1 text-left ml-12 pt-16 ">
-          <h1
-          class="text-4xl md:text-5xl font-bold  pt-16  text-white leading-snug"
-        >
-          Unlock Your Potential 
-          <span class="block md:inline"> <br />Become a Frontend Hero</span>
-        </h1>
+ <h1
+  class="text-4xl md:text-5xl font-bold pt-16 text-white leading-snug"
+  v-html="typedTextWithBreaks"
+></h1>
+
         <p class="text-white/80 mt-6 text-lg text ">
           Master HTML, CSS, JS, <br>and more Courses: HTML, CSS, JavaScript,<br>
           Tailwind CSS, Vue.js, Nuxt.js
@@ -157,11 +156,32 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const menuOpen = ref(false);
-
 function toggleMenu() {
   menuOpen.value = !menuOpen.value;
 }
+
+const fullText = `Unlock Your Potential
+Become a Frontend Hero`;
+
+const typedText = ref("");
+let index = 0;
+
+function type() {
+  if (index <= fullText.length) {
+    typedText.value = fullText.slice(0, index);
+    index++;
+    setTimeout(type, 100);
+  }
+}
+
+const typedTextWithBreaks = computed(() =>
+  typedText.value.replace(/\n/g, "<br>")
+);
+
+onMounted(() => {
+  type();
+});
 </script>

@@ -4,12 +4,12 @@
   </div>
   <div class="min-h-screen bg-gray-100 text-gray-800">
     <!-- Header -->
-    <header class="bg-white shadow-md py-4 px-6">
-      <h1 class="text-2xl font-bold text-center">HTML Course - Learn Step by Step</h1>
+    <header class=" py-8 px-6">
+      <h1 class="text-2xl font-bold mt-5 ml-9 text-center">HTML Course - Learn Step by Step</h1>
     </header>
 
     <!-- Course Topics -->
-    <section class="container mx-auto px-4 py-10 ">
+    <section class="container mx-auto px-4 py-10  ">
       <div
         v-for="(topic, index) in visibleTopics"
         :key="index"
@@ -60,6 +60,91 @@
     </section>
   </div>
   <!-- quiz  -->
+   <template>
+  <div class="w-full mx-auto p-8 bg-gradient-to-br from-purple-50 to-indigo-100 rounded-xl shadow-2xl mt-14">
+    <h2 class="text-3xl font-extrabold mb-8 text-center text-indigo-800 drop-shadow-md">
+      HTML Quiz
+    </h2>
+
+    <!-- Progress Bar -->
+    <div class="w-full bg-indigo-200 rounded-full h-3 mb-8 overflow-hidden shadow-inner">
+      <div
+        class="h-3 w-full bg-indigo-600 rounded-full transition-all duration-500"
+        :style="{ width: ((currentQuestion + 1) / questions.length) * 100 + '%' }"
+      ></div>
+    </div>
+
+    <div v-if="currentQuestion < questions.length">
+      <p class="mb-3 text-sm text-indigo-700 font-semibold tracking-wide uppercase">
+        Question {{ currentQuestion + 1 }} of {{ questions.length }}
+      </p>
+      <p class="mb-6 text-xl font-semibold text-gray-900 leading-relaxed">
+        {{ questions[currentQuestion].question }}
+      </p>
+
+      <div class="space-y-4">
+        <label
+          v-for="(option, idx) in questions[currentQuestion].options"
+          :key="idx"
+          class="block cursor-pointer rounded-lg border border-gray-300 p-4 hover:border-indigo-500 hover:bg-indigo-50
+          transition-colors duration-300 flex items-center select-none
+          "
+          :class="{
+            'border-green-500 bg-green-100 text-green-900 font-semibold': showResult && idx === questions[currentQuestion].correctIndex,
+            'border-red-500 bg-red-100 text-red-900 font-semibold': showResult && selectedOption === idx && idx !== questions[currentQuestion].correctIndex
+          }"
+        >
+          <input
+            type="radio"
+            :value="idx"
+            v-model="selectedOption"
+            :disabled="showResult"
+            class="mr-4 w-5 h-5 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+          />
+          <span class="flex-1">{{ option }}</span>
+        </label>
+      </div>
+
+      <div class="mt-8 flex justify-between items-center">
+        <button
+          @click="checkAnswer"
+          :disabled="selectedOption === null || showResult"
+          class="px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold
+            disabled:bg-indigo-300 disabled:cursor-not-allowed
+            hover:bg-indigo-700 transition-colors duration-300"
+        >
+          Submit
+        </button>
+        <button
+          v-if="showResult && isCorrect"
+          @click="nextQuestion"
+          class="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold
+            hover:bg-green-700 transition-colors duration-300"
+        >
+          Next
+        </button>
+      </div>
+
+      <p v-if="showResult && !isCorrect" class="mt-6 text-red-600 font-bold text-center text-lg animate-pulse">
+        ❌ Try Again!
+      </p>
+    </div>
+
+    <div v-else class="text-center">
+      <h3 class="text-3xl font-extrabold mb-6 text-indigo-900 drop-shadow-md">
+        🎉 Congratulations! You completed the quiz.
+      </h3>
+      <button
+        @click="restartQuiz"
+        class="px-8 py-4 bg-indigo-700 text-white rounded-lg font-bold
+          hover:bg-indigo-800 transition-colors duration-300"
+      >
+        Restart Quiz
+      </button>
+    </div>
+  </div>
+</template>
+
 </template>
 
 <script setup>
@@ -1106,7 +1191,559 @@ function completeTopic(index) {
 }
 
 function loadMore() {
-  // Show 5 more topics, but don't exceed the total number of topics
+ // Show 5 more topics, but don't exceed the total number of topics
   topicsToShow.value = Math.min(topicsToShow.value + 5, topics.value.length)
+}
+
+
+const questions = [
+  {
+    question: "What does HTML stand for?",
+    options: [
+      "Hyperlinks and Text Markup Language",
+      "Hyper Text Markup Language",
+      "Home Tool Markup Language",
+      "Hyper Tool Multi Language"
+    ],
+    correctIndex: 1,
+  },
+  {
+    question: "Which tag is used to create a hyperlink in HTML?",
+    options: [
+      "<a>",
+      "<link>",
+      "<href>",
+      "<hyperlink>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which attribute is used to specify the URL in the <a> tag?",
+    options: [
+      "src",
+      "href",
+      "url",
+      "link"
+    ],
+    correctIndex: 1,
+  },
+  {
+    question: "Which attribute is used to specify the URL in the <a> tag?",
+    options: [
+      "src",
+      "href",
+      "url",
+      "link"
+    ],
+    correctIndex: 1,
+  },
+  {
+    question: "What is the correct HTML element for inserting a line break?",
+    options: [
+      "<break>",
+      "<br>",
+      "<lb>",
+      "<newline>"
+    ],
+    correctIndex: 1,
+  },
+  {
+    question: "Which tag is used to define an unordered list?",
+    options: [
+      "<ol>",
+      "<ul>",
+      "<li>",
+      "<list>"
+    ],
+    correctIndex: 1,
+  },
+  {
+    question: "Which tag is used to define a list item?",
+    options: [
+      "<li>",
+      "<item>",
+      "<listitem>",
+      "<ul>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "What is the correct HTML element for the largest heading?",
+    options: [
+      "<heading>",
+      "<h6>",
+      "<head>",
+      "<h1>"
+    ],
+    correctIndex: 3,
+  },
+  {
+    question: "Which attribute is used to provide alternative text for an image?",
+    options: [
+      "alt",
+      "title",
+      "src",
+      "longdesc"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which HTML element is used to specify a footer for a document or section?",
+    options: [
+      "<bottom>",
+      "<footer>",
+      "<section>",
+      "<aside>"
+    ],
+    correctIndex: 1,
+  },
+  {
+    question: "Which HTML element is used for playing audio files?",
+    options: [
+      "<sound>",
+      "<mp3>",
+      "<audio>",
+      "<music>"
+    ],
+    correctIndex: 2,
+  },
+  {
+    question: "Which tag is used to create a table row?",
+    options: [
+      "<tr>",
+      "<td>",
+      "<table>",
+      "<row>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which tag is used to create a table cell?",
+    options: [
+      "<td>",
+      "<tr>",
+      "<th>",
+      "<cell>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "How do you create a checkbox in HTML?",
+    options: [
+      "<input type='checkbox'>",
+      "<checkbox>",
+      "<input type='check'>",
+      "<check>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which tag is used to define a paragraph?",
+    options: [
+      "<para>",
+      "<p>",
+      "<pg>",
+      "<paragraph>"
+    ],
+    correctIndex: 1,
+  },
+  {
+    question: "How do you insert a comment in HTML?",
+    options: [
+      "// this is comment",
+      "<!-- this is comment -->",
+      "/* this is comment */",
+      "# this is comment"
+    ],
+    correctIndex: 1,
+  },
+  {
+    question: "Which attribute is used to open a link in a new tab?",
+    options: [
+      "target='_blank'",
+      "new_tab='yes'",
+      "open='_new'",
+      "tab='new'"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "What is the default display value of the <div> element?",
+    options: [
+      "inline",
+      "block",
+      "inline-block",
+      "none"
+    ],
+    correctIndex: 1,
+  },
+  {
+    question: "Which tag is used to make text bold?",
+    options: [
+      "<strong>",
+      "<bold>",
+      "<b>",
+      "Both <b> and <strong>"
+    ],
+    correctIndex: 3,
+  },
+  {
+    question: "Which tag is used to create a dropdown list?",
+    options: [
+      "<select>",
+      "<dropdown>",
+      "<input type='dropdown'>",
+      "<list>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which tag is used to insert an image?",
+    options: [
+      "<img>",
+      "<image>",
+      "<pic>",
+      "<src>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "What does the 'src' attribute specify in the <img> tag?",
+    options: [
+      "Size of image",
+      "Source of image",
+      "Style of image",
+      "Screen resolution"
+    ],
+    correctIndex: 1,
+  },
+  {
+    question: "Which tag is used to define a section in HTML5?",
+    options: [
+      "<section>",
+      "<div>",
+      "<article>",
+      "<aside>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "What does the <title> tag define?",
+    options: [
+      "The title of the webpage shown in browser tab",
+      "Title of a paragraph",
+      "Header of a page",
+      "Footer of a page"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which HTML tag is used to display a numbered list?",
+    options: [
+      "<ol>",
+      "<ul>",
+      "<li>",
+      "<list>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "What is the correct way to create a hyperlink that links to 'https://www.google.com'?",
+    options: [
+      `<a href="https://www.google.com">Google</a>`,
+      `<a url="https://www.google.com">Google</a>`,
+      `<link href="https://www.google.com">Google</link>`,
+      `<a name="https://www.google.com">Google</a>`
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which attribute specifies the size of an input field?",
+    options: [
+      "length",
+      "size",
+      "width",
+      "height"
+    ],
+    correctIndex: 1,
+  },
+  {
+    question: "Which tag is used to define a header for a document or section?",
+    options: [
+      "<header>",
+      "<head>",
+      "<section>",
+      "<top>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which attribute is used to specify an input field's placeholder text?",
+    options: [
+      "tooltip",
+      "title",
+      "placeholder",
+      "hint"
+    ],
+    correctIndex: 2,
+  },
+  {
+    question: "How do you create a radio button in HTML?",
+    options: [
+      `<input type="radio">`,
+      `<radio>`,
+      `<input type="button">`,
+      `<input type="checkbox">`
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "What is the correct HTML element for playing video files?",
+    options: [
+      "<video>",
+      "<movie>",
+      "<media>",
+      "<clip>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which tag is used to define a caption for a <table>?",
+    options: [
+      "<caption>",
+      "<title>",
+      "<label>",
+      "<legend>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which attribute is used to define inline styles in HTML?",
+    options: [
+      "style",
+      "class",
+      "font",
+      "styles"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which tag is used to define a hyperlink to an external CSS file?",
+    options: [
+      "<link>",
+      "<css>",
+      "<style>",
+      "<script>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which attribute is used with <form> to specify where to send form-data on submission?",
+    options: [
+      "action",
+      "method",
+      "target",
+      "submit"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which attribute specifies the HTTP method (GET or POST) to use when submitting a form?",
+    options: [
+      "method",
+      "action",
+      "submit",
+      "type"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which input type creates a password field?",
+    options: [
+      `<input type="password">`,
+      `<input type="pass">`,
+      `<input type="text">`,
+      `<input type="secret">`
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which tag defines the title of a document?",
+    options: [
+      "<title>",
+      "<head>",
+      "<header>",
+      "<document>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which HTML element is used to define emphasized text?",
+    options: [
+      "<em>",
+      "<i>",
+      "<strong>",
+      "<bold>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "How do you create a numbered list in HTML?",
+    options: [
+      "<ol>",
+      "<ul>",
+      "<list>",
+      "<nl>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which attribute is used to specify the language of the HTML document?",
+    options: [
+      "lang",
+      "language",
+      "xml:lang",
+      "doclang"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "What is the correct HTML element for inserting a horizontal line?",
+    options: [
+      "<hr>",
+      "<line>",
+      "<hl>",
+      "<br>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which tag is used to define a blockquote?",
+    options: [
+      "<blockquote>",
+      "<quote>",
+      "<q>",
+      "<bq>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which tag is used to create a dropdown menu?",
+    options: [
+      "<select>",
+      "<dropdown>",
+      "<menu>",
+      "<option>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which tag is used to insert a line break?",
+    options: [
+      "<br>",
+      "<lb>",
+      "<break>",
+      "<newline>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "What does the <meta> tag do in an HTML document?",
+    options: [
+      "Defines metadata about the HTML document",
+      "Defines the main content",
+      "Defines the footer",
+      "Adds images"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which attribute specifies the character encoding for the HTML document?",
+    options: [
+      "charset",
+      "encoding",
+      "code",
+      "lang"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "What is the correct HTML element for inserting a video?",
+    options: [
+      "<video>",
+      "<movie>",
+      "<media>",
+      "<clip>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which element defines navigation links in HTML5?",
+    options: [
+      "<nav>",
+      "<navigation>",
+      "<menu>",
+      "<section>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which element is used to group footer content in HTML5?",
+    options: [
+      "<footer>",
+      "<bottom>",
+      "<section>",
+      "<aside>"
+    ],
+    correctIndex: 0,
+  },
+  {
+    question: "Which tag is used to create a form in HTML?",
+    options: [
+      "<form>",
+      "<input>",
+      "<fieldset>",
+      "<submit>"
+    ],
+    correctIndex: 0,
+  }
+]
+
+const currentQuestion = ref(0)
+const selectedOption = ref(null)
+const showResult = ref(false)
+const isCorrect = ref(false)
+
+function checkAnswer() {
+  if (selectedOption.value === questions[currentQuestion.value].correctIndex) {
+    isCorrect.value = true
+    showResult.value = true
+    alert("🎉 Congratulations! Correct answer.")
+
+    currentQuestion.value++
+    selectedOption.value = null
+    showResult.value = false // agle question ke liye reset
+  } else {
+    isCorrect.value = false
+    alert("Oops! Wrong answer. Try again.")
+    // showResult ko false rakho takay options enable rahein
+    showResult.value = false
+    selectedOption.value = null // reset selection taaki dobara select kare
+  }
+}
+
+
+function nextQuestion() {
+  currentQuestion.value++
+  selectedOption.value = null
+  showResult.value = false
+  isCorrect.value = false
+}
+
+function restartQuiz() {
+  currentQuestion.value = 0
+  selectedOption.value = null
+  showResult.value = false
+  isCorrect.value = false
 }
 </script>
