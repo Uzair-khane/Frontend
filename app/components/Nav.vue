@@ -114,45 +114,8 @@
       </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class=" ">
-    <div
-  class="bg-[url('/baner.jpg')] bg-cover bg-center   text-center h-[650px] w-full"
->
-      <div class="grid-cols-1 text-left ml-12 pt-16 ">
-          <h1
-          class="text-4xl md:text-5xl font-bold  pt-16  text-white leading-snug"
-        >
-          Unlock Your Potential 
-          <span class="block md:inline"> <br />Become a Frontend Hero</span>
-        </h1>
-        <p class="text-white/80 mt-6 text-lg text ">
-          Master HTML, CSS, JS, <br>and more Courses: HTML, CSS, JavaScript,<br>
-          Tailwind CSS, Vue.js, Nuxt.js
-
-          <br />
-        </p>
-      </div>
-
-        <div class="mt-8 flex items-start ml-12 gap-6 flex-wrap">
-          <!-- get started button  -->
-          <nuxt-link to="/book">
-            <button
-              class="bg-blue-500 hover:cursor-pointer text-white px-6 py-3 rounded-md font-medium hover:bg-blue-600 transition"
-            >
-              Start Learning Now
-            </button>
-          </nuxt-link>
-          <!-- <a href="">
-            <button
-              class="border border-blue-500 text-blue-500 px-6 py-3 rounded-md font-medium hover:bg-blue-50 transition hover:cursor-pointer"
-            >
-              Explore More Features
-            </button>
-          </a> -->
-        </div>
-      </div>
-    </section>
+    
+  
   </div>
 </template>
 

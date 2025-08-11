@@ -1,18 +1,16 @@
 <template>
   <div class="min-h-screen bg-gray-100 text-gray-800 flex flex-col">
     <!-- Header -->
-    <header class="bg-white py-4">
-      <h1 class="text-xl font-bold text-center mt-16">🤖 Experience Your AI Tutor</h1>
-    </header>
+  
 
     <!-- Subheading -->
-    <section class="container mx-auto px-4 py-6 text-center">
-      <h2 class="text-3xl font-bold mb-4 mt-8">Ask Anything from AI</h2>
+    <section class="container mx-auto px-4 py-6 ">
+      <h2 class="text-4xl font-bold mb-4 mt-8 text-center ">Ask Anything from AI</h2>
     </section>
 
     <!-- Chat Area -->
     <section class="bg-gray-100 flex-1 rounded-t-3xl py-6 px-4">
-      <div class="max-w-3xl mx-auto bg-gray-300 flex flex-col h-[500px] border border-gray-300 rounded-xl overflow-hidden">
+      <div class="w-full mx-auto bg-gray-200 flex flex-col h-[500px] border border-gray-300 rounded-xl overflow-hidden">
         <div class="flex-1 overflow-y-auto p-4 space-y-4" ref="chatContainer">
           <div v-for="(msg, i) in messages" :key="i" :class="msg.role === 'user' ? 'text-right' : 'text-left'">
             <div :class="msg.role === 'user' ? 'bg-blue-500 text-white' : 'bg-white text-gray-800'"
