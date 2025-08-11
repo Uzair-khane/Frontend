@@ -87,21 +87,21 @@
   <nuxt-link to="/html" class="text-gray-700 font-medium hover:text-blue-600"> 
     HTML
   </nuxt-link>
-  <a href="/courses/css" class="text-gray-700 font-medium hover:text-blue-600">
-    CSS
-  </a>
-  <a href="/courses/javascript" class="text-gray-700 font-medium hover:text-blue-600">
+ <nuxt-link to="/css" class="text-gray-700 font-medium hover:text-blue-600"> 
+    Css
+  </nuxt-link>
+ <nuxt-link to="/js" class="text-gray-700 font-medium hover:text-blue-600"> 
     JavaScript
-  </a>
-  <a href="/courses/tailwind" class="text-gray-700 font-medium hover:text-blue-600">
-    Tailwind CSS
-  </a>
-  <a href="/courses/vue" class="text-gray-700 font-medium hover:text-blue-600">
-    Vue.js
-  </a>
-  <a href="/courses/nuxt" class="text-gray-700 font-medium hover:text-blue-600">
-    Nuxt.js
-  </a>
+  </nuxt-link>
+ <nuxt-link to="/tailwind" class="text-gray-700 font-medium hover:text-blue-600"> 
+    tailwind Css
+  </nuxt-link>
+  <nuxt-link to="/vue" class="text-gray-700 font-medium hover:text-blue-600"> 
+    Vue js
+  </nuxt-link>
+ <nuxt-link to="/nuxt" class="text-gray-700 font-medium hover:text-blue-600"> 
+    Nuxt Js
+  </nuxt-link>
 
 
         <nuxt-link to="/book">
